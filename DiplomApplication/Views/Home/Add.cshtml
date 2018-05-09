@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Додати документ";
+}
+<body class="skin-3">
+    <style>
+        * {
+            font-family: "Open Sans";
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: "Open Sans";
+        }
+    </style>
+    <div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint"><div id="navbar-container" class="navbar-container"><button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar"><span class="sr-only">Toggle sidebar</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-header"><a href="~/Home/Index" class="navbar-brand"><span class="smaller-75"> Документообіг </span></a><button type="button" class="navbar-toggle navbar-toggle collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu"><span class="sr-only">Toggle user menu</span><i class="ace-icon fa fa-user fa-2x white"></i> </button></div><div class="navbar-buttons navbar-header navbar-collapse collapse"><ul class="nav ace-nav"><li class="hidden-sm hidden-xs"><div class="btn-group btn-corner padding-right-8 padding-left-8"><a class="btn btn-primary btn-sm" href="~/Home/Add"><i class="fa fa-edit"></i> Додати документ </a></div></li><li class="grey"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="ace-icon fa fa-user fa-2x white"></i> <span class="user-info">@User.Identity.Name</span><i class="ace-icon fa fa-angle-down"></i></a><ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close"><li><a href="~/Account/Config"><i class="ace-icon fa fa-user"> </i> Керування</a></li><li class="divider"></li><li><a href="~/Home/Logoff"><i class="ace-icon fa fa-sign-out"> </i> Вихід</a></li></ul></li></ul></div></div></div><div class="main-container" id="main-container" style="padding-top: 45px;">
+        <div id="sidebar" class="sidebar sidebar-fixed responsive compact ">
+            <ul class="nav nav-list">
+                <li>
+                    <a href="~/Home/Index">
+                        <i class="menu-icon fa fa-dashboard"></i>
+                        <span class="menu-text"> Головна </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="~/Home/DocList">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text"> Список документів </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="active">
+                    <a href="~/Home/Add">
+                        <i class="menu-icon fa fa-edit"></i>
+                        <span class="menu-text"> Додати документ </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="~/Account/Config">
+                        <i class="menu-icon fa fa-gears"></i>
+                        <span class="menu-text"> Керування </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul><div class="sidebar-toggle sidebar-collapse"><i data-icon2="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-left" class="ace-icon fa fa-angle-double-left"></i></div>
+        </div><div class="main-content">
+            <div id="breadcrumbs" class="breadcrumbs noprint">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-user home-icon active"></i>  <a>@User.Identity.Name</a>
+                        <span class="label hidden-xs label-default arrowed">Користувач</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <form id="report_bug_form" method="post" enctype="multipart/form-data" action="bug_report.php?posted=1">
+                            <input type="hidden" name="bug_report_token" value="20180507EtoeFP8QapsWAyZvIVEUNvqZexQd-9Sz"><input type="hidden" name="m_id" value="0">
+                            <input type="hidden" name="project_id" value="1">
+                            <div class="widget-box widget-color-blue2">
+                                <div class="widget-header widget-header-small">
+                                    <h4 class="widget-title lighter">
+                                        <i class="ace-icon fa fa-edit"></i>
+                                        Введіть дані документу
+                                    </h4>
+                                </div>
+                                <div class="widget-body dz-clickable">
+                                    <div class="widget-main no-padding">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-condensed">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="category">
+                                                            <label for="summary">Номер документу</label>
+                                                        </th>
+                                                        <td>
+                                                            <input tabindex="9" type="text" id="summary" name="summary" size="105" maxlength="128" value="" required="">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="category">
+                                                            <label for="summary">Дата отримання</label>
+                                                        </th>
+                                                        <td>
+                                                            <input tabindex="9" type="text" id="summary" name="summary" size="105" maxlength="128" value="" required="">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="category">
+                                                            <label for="summary">Назва документу</label>
+                                                        </th>
+                                                        <td>
+                                                            <input tabindex="9" type="text" id="summary" name="summary" size="105" maxlength="128" value="" required="">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="category">
+                                                            <label for="priority">Приоритет</label>
+                                                        </th>
+                                                        <td>
+                                                            <select tabindex="4" id="priority" name="priority" class="input-sm">
+                                                                <option value="10">нет</option>
+                                                                <option value="20">низкий</option>
+                                                                <option value="30" selected="selected">обычный</option>
+                                                                <option value="40">высокий</option>
+                                                                <option value="50">срочный</option>
+                                                                <option value="60">неотложный</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="category">
+                                                            <label for="handler_id">Назначить</label>
+                                                        </th>
+                                                        <td>
+                                                            <select tabindex="8" id="handler_id" name="handler_id" class="input-sm">
+                                                                <option value="0" selected="selected"></option>
+                                                                <option value="1">administrator</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="category">
+                                                            <label for="ufile[]">Загрузить файлы</label>
+                                                            <br>
+                                                        </th>
+                                                        <td>
+                                                            <input type="hidden" name="max_file_size" value="5000000">
+                                                            <div class="dropzone center dz-clickable" data-force-fallback="false" data-max-filesize="5" data-accepted-files="" data-default-message="Для загрузки перетащите файлы сюда (или щелкните мышкой)" data-fallback-message="Ваш браузер не поддерживает загрузку файлов через перетаскивание." data-fallback-text="" data-file-too-big="Файл слишком большой ({{filesize}}MiB). Максимальный размер файла: {{maxFilesize}}MiB." data-invalid-file-type="Вы не можете загружать файлы с этим расширением." data-response-error="Сервер ответил с кодом {{statusCode}}." data-cancel-upload="Отменить загрузку" data-cancel-upload-confirmation="Вы уверены, что хотите отменить эту загрузку?" data-remove-file="Видалити файл" data-remove-file-confirmation="" data-max-files-exceeded="Вы не можете загрузить больше файлов." data-dropzone-not-supported="Dropzone.js не поддерживает старые браузеры!">
+                                                                <i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
+                                                                <span class="bigger-150 grey">Для загрузки перетащите файлы сюда (или щелкните мышкой)</span>
+                                                                <div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="widget-toolbox padding-8 clearfix">
+                                        <span class="required pull-right"> * Поле, обязательное для заполнения</span>
+                                        <input tabindex="18" type="submit" class="btn btn-primary btn-white btn-round" value="Создать задачу">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</div>-->
+</body>
