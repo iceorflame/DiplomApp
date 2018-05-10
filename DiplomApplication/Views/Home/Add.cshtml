@@ -1,6 +1,10 @@
-﻿@{
+﻿@model DiplomApplication.Models.Order
+@{
     ViewBag.Title = "Додати документ";
 }
+
+@using (Html.BeginForm())
+{
 <body class="skin-3">
     <style>
         * {
@@ -75,7 +79,7 @@
                                                             <label for="summary">Номер документу</label>
                                                         </th>
                                                         <td>
-                                                            <input tabindex="9" type="text" id="summary" name="summary" size="105" maxlength="128" value="" required="">
+                                                            @Html.EditorFor(model => model.OrderNumber, new { htmlAttributes = new { @autocomplete = "off", @type ="text", @size = "105", @maxlength = "128"} })
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -83,7 +87,7 @@
                                                             <label for="summary">Дата отримання</label>
                                                         </th>
                                                         <td>
-                                                            <input tabindex="9" type="date" id="datepicker" name="summary" size="105" maxlength="128" value="" required="">
+                                                            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @autocomplete = "off", @type ="date", @size = "105", @maxlength = "128" } })
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -91,33 +95,23 @@
                                                             <label for="summary">Назва документу</label>
                                                         </th>
                                                         <td>
-                                                            <input tabindex="9" type="text" id="summary" name="summary" size="105" maxlength="128" value="" required="">
+                                                            @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @autocomplete = "off", @size = "105", @maxlength = "128" } })
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th class="category">
-                                                            <label for="priority">Приоритет</label>
+                                                            <label for="handler_id">Адресат</label>
                                                         </th>
                                                         <td>
-                                                            <select tabindex="4" id="priority" name="priority" class="input-sm">
-                                                                <option value="10">нет</option>
-                                                                <option value="20">низкий</option>
-                                                                <option value="30" selected="selected">обычный</option>
-                                                                <option value="40">высокий</option>
-                                                                <option value="50">срочный</option>
-                                                                <option value="60">неотложный</option>
-                                                            </select>
+                                                            @Html.DropDownListFor(model => model.UserId, ViewBag.Users as SelectList)
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th class="category">
-                                                            <label for="handler_id">Назначить</label>
+                                                            <label for="priority">Пріорітет</label>
                                                         </th>
                                                         <td>
-                                                            <select tabindex="8" id="handler_id" name="handler_id" class="input-sm">
-                                                                <option value="0" selected="selected"></option>
-                                                                <option value="1">administrator</option>
-                                                            </select>
+                                                            @Html.DropDownListFor(model => model.PriorityId, ViewBag.Priorities as SelectList)
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -126,7 +120,7 @@
                                                             <br>
                                                         </th>
                                                         <td>
-                                                            <input type="hidden" name="max_file_size" value="5000000">
+                                                            <input type="hidden" name="max_file_size" value="50000000">
                                                             <div class="dropzone center dz-clickable" data-force-fallback="false" data-max-filesize="5" data-accepted-files="" data-default-message="Для загрузки перетащите файлы сюда (или щелкните мышкой)" data-fallback-message="Ваш браузер не поддерживает загрузку файлов через перетаскивание." data-fallback-text="" data-file-too-big="Файл слишком большой ({{filesize}}MiB). Максимальный размер файла: {{maxFilesize}}MiB." data-invalid-file-type="Вы не можете загружать файлы с этим расширением." data-response-error="Сервер ответил с кодом {{statusCode}}." data-cancel-upload="Отменить загрузку" data-cancel-upload-confirmation="Вы уверены, что хотите отменить эту загрузку?" data-remove-file="Видалити файл" data-remove-file-confirmation="" data-max-files-exceeded="Вы не можете загрузить больше файлов." data-dropzone-not-supported="Dropzone.js не поддерживает старые браузеры!">
                                                                 <i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
                                                                 <span class="bigger-150 grey">Для загрузки перетащите файлы сюда (или щелкните мышкой)</span>
@@ -141,8 +135,7 @@
                                         </div>
                                     </div>
                                     <div class="widget-toolbox padding-8 clearfix">
-                                        <span class="required pull-right"> * Поле, обязательное для заполнения</span>
-                                        <input tabindex="18" type="submit" class="btn btn-primary btn-white btn-round" value="Создать задачу">
+                                        <input tabindex="18" type="submit" class="btn btn-primary btn-white btn-round" value="Відправити документ">
                                     </div>
                                 </div>
                             </div>
@@ -154,3 +147,4 @@
     </div>
     <!--</div>-->
 </body>
+}

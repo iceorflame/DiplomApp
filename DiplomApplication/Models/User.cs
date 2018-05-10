@@ -9,10 +9,17 @@ namespace DiplomApplication.Models
     {
         public int UserId { get; set; }
         public string UserLogin { get; set; }
+        public string UserName { get; set; }
         public string UserPassword { get; set; }
 
         public int RoleId { get; set; }
         public Role Role { get; set; }
+
+        ICollection<Order> Orders { get; set; }
+        public User()
+        {
+            Orders = new List<Order>();
+        }
     }
 
     public class Order
@@ -28,10 +35,6 @@ namespace DiplomApplication.Models
 
         public int PriorityId { get; set; }
         public Priority Priority { get; set; }
-    }
-
-    public class File
-    {
 
     }
 
@@ -45,5 +48,11 @@ namespace DiplomApplication.Models
     {
         public int PriorityId { get; set; }
         public string PriorityName { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
+        public Priority()
+        {
+            Orders = new List<Order>();
+        }
     }
 }
