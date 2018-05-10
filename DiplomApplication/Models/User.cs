@@ -22,6 +22,14 @@ namespace DiplomApplication.Models
         }
     }
 
+    public class File
+    {
+        public int FileId { get; set; }
+        public string FileName { get; set; }
+        public string FileType { get; set; }
+        public byte[] FileByte { get; set; }
+    }
+
     public class Order
     {
         public int OrderId { get; set; }
@@ -36,6 +44,8 @@ namespace DiplomApplication.Models
         public int PriorityId { get; set; }
         public Priority Priority { get; set; }
 
+        public int FileId { get; set; }
+        public File File { get; set; }
     }
 
     public class Role

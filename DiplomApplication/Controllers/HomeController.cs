@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Data.Entity;
+using System.IO;
 
 namespace DiplomApplication.Controllers
 {
@@ -32,11 +33,23 @@ namespace DiplomApplication.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Add(Order order)
+        public ActionResult Add(Order order, Models.File file, HttpPostedFileBase uploadFile)
         {
+            byte[] imageData = null;
+            // считываем переданный файл в массив байтов
+            using (var binaryReader = new BinaryReader(uploadFile.InputStream))
+            {
+                imageData = binaryReader.ReadBytes(uploadFile.ContentLength);
+            }
+            // установка массива байтов
+            file.FileByte = imageData;
+            file.FileName = "";
+            file.FileType = "";
             order.OrderOut = DateTime.Now;
+            db.Files.Add(file);
             db.Orders.Add(order);
             db.SaveChanges();
+            db.Files.Add(file);
             return RedirectToAction("DocList","Home");
         }
 
@@ -52,5 +65,6 @@ namespace DiplomApplication.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }
+
     }
 }

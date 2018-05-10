@@ -15,6 +15,6 @@ namespace DiplomApplication.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Priority> Priorities { get; set; }
-
+        public DbSet<File> Files { get; set; }
     }
 }

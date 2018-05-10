@@ -3,7 +3,7 @@
     ViewBag.Title = "Додати документ";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Add","Home",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 <body class="skin-3">
     <style>
@@ -120,7 +120,7 @@
                                                             <br>
                                                         </th>
                                                         <td>
-                                                            <input type="hidden" name="max_file_size" value="5000000">
+                                                            <input type="file" name="uploadFile" value="5000000">
                                                             <div class="dropzone center dz-clickable" data-force-fallback="false" data-max-filesize="5" data-accepted-files="" data-default-message="Для загрузки перетащите файлы сюда (или щелкните мышкой)" data-fallback-message="Ваш браузер не поддерживает загрузку файлов через перетаскивание." data-fallback-text="" data-file-too-big="Файл слишком большой ({{filesize}}MiB). Максимальный размер файла: {{maxFilesize}}MiB." data-invalid-file-type="Вы не можете загружать файлы с этим расширением." data-response-error="Сервер ответил с кодом {{statusCode}}." data-cancel-upload="Отменить загрузку" data-cancel-upload-confirmation="Вы уверены, что хотите отменить эту загрузку?" data-remove-file="Видалити файл" data-remove-file-confirmation="" data-max-files-exceeded="Вы не можете загрузить больше файлов." data-dropzone-not-supported="Dropzone.js не поддерживает старые браузеры!">
                                                                 <i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
                                                                 <span class="bigger-150 grey">Для загрузки перетащите файлы сюда (или щелкните мышкой)</span>
