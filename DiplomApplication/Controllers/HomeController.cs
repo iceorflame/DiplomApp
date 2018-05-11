@@ -33,21 +33,25 @@ namespace DiplomApplication.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Add(Order order, Models.File file, HttpPostedFileBase uploadFile)
+        public ActionResult Add(Order order, Models.File file, HttpPostedFileBase uploadFile = null)
         {
-            byte[] imageData = null;
-            // считываем переданный файл в массив байтов
-            using (var binaryReader = new BinaryReader(uploadFile.InputStream))
+            if (uploadFile != null)
             {
-                imageData = binaryReader.ReadBytes(uploadFile.ContentLength);
+                byte[] imageData = null;
+                // считываем переданный файл в массив байтов
+                using (var binaryReader = new BinaryReader(uploadFile.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(uploadFile.ContentLength);
+                }
+                // установка массива байтов
+                file.FileByte = imageData;
+                file.FileName = uploadFile.FileName;
+                file.FileType = "";
+                db.Files.Add(file);
+                order.FileId = file.FileId;
             }
-            // установка массива байтов
-            file.FileByte = imageData;
-            file.FileName = uploadFile.FileName;
-            file.FileType = "";
             order.OrderOut = DateTime.Now;
-            db.Files.Add(file);
-            order.FileId = file.FileId;
+            
             db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("DocList","Home");
