@@ -43,20 +43,25 @@ namespace DiplomApplication.Controllers
             }
             // установка массива байтов
             file.FileByte = imageData;
-            file.FileName = "";
+            file.FileName = uploadFile.FileName;
             file.FileType = "";
             order.OrderOut = DateTime.Now;
             db.Files.Add(file);
+            order.FileId = file.FileId;
             db.Orders.Add(order);
             db.SaveChanges();
-            db.Files.Add(file);
             return RedirectToAction("DocList","Home");
         }
 
         [Authorize]
         public ActionResult DocList()
         {
-            return View();
+            var orders = db.Orders.Include(p=>p.File);
+            //var orders = db.Orders.Include(p => p.File);
+            //var orders2 = orders.Include(p => p.Priority);
+            //var orders3 = orders2.Include(p => p.User);
+            //ViewBag.Orders = orders;
+            return View(orders.ToList());
         }
 
         [Authorize]

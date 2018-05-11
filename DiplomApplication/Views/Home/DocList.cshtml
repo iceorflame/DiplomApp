@@ -1,8 +1,10 @@
-﻿@{
+﻿@model IEnumerable<DiplomApplication.Models.Order>
+@{
     ViewBag.Title = "Список документів";
 }
 <body class="skin-3">
     <style>
+
         * {
             font-family: "Open Sans";
         }
@@ -64,9 +66,7 @@
                                         Список задач
                                     </h4>
                                 </div>
-
                                 <div class="widget-body">
-
                                     <div class="widget-main no-padding">
                                         <div class="table-responsive">
                                             <table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
@@ -84,12 +84,25 @@
                                                         <th class="column-last-modified"><a href="view_all_set.php?sort_add=last_updated&amp;dir_add=ASC&amp;type=2">Изменена</a>&nbsp;<!--<i class="fa fa-caret-down fa-lg blue"></i>--></th>
                                                         <th class="column-summary"><a href="view_all_set.php?sort_add=summary&amp;dir_add=ASC&amp;type=2">Тема</a></th>
                                                     </tr>
-
+                                                    @foreach (var item in Model) 
+                                                    {
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>@item.OrderNumber</td>
+                                                    <td>@item.OrderDate</td>
+                                                    <td>@item.OrderName</td>
+                                                    <td>@item.OrderOut</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.User.UserName)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Priority.PriorityName)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.File.FileName)</td>
+                                                </tr>
+}
                                                 </thead>
                                                 <tbody></tbody>
                                             </table>
                                         </div>
-
                                         <div class="widget-toolbox padding-8 clearfix">
                                             <div class="form-inline pull-left">
                                                 &nbsp;

@@ -38,13 +38,13 @@ namespace DiplomApplication.Models
         public string OrderName { get; set; }
         public DateTime OrderOut { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public User User { get; set; }
 
-        public int PriorityId { get; set; }
+        public int? PriorityId { get; set; }
         public Priority Priority { get; set; }
 
-        public int FileId { get; set; }
+        public int? FileId { get; set; }
         public File File { get; set; }
     }
 
