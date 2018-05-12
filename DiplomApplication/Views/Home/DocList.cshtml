@@ -100,8 +100,8 @@
                                                     <td class="column-summary">Неотложный</td>
                                                 </tr>*@
                                                 <tr>
-                                                    <td class="column-selection"><a href="bug_update_page.php?bug_id=9"><i class="fa fa-trash bigger-130 padding-2 grey" title="Видалити"></i></a></td>
-                                                    <td class="column-edit"><a href="bug_update_page.php?bug_id=9"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Редагувати"></i></a></td>
+                                                    <td class="column-selection"><a href="~/Home/Delete/@item.OrderId"><i class="fa fa-trash bigger-130 padding-2 grey" title="Видалити"></i></a></td>
+                                                    <td class="column-edit"><a href="~/Home/Edit/@item.OrderId"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Редагувати"></i></a></td>
                                                     <td class="column-priority">@if (item.PriorityId == 2) { <i class="fa fa-chevron-down fa-lg green" title="Низький" />}
                                                                                 @if (item.PriorityId == 3) { <i class="fa fa-minus fa-lg orange2" title="Звичайний" />}
                                                                                 @if (item.PriorityId == 4) { <i class="fa fa-chevron-up fa-lg red" title="Високий" />}

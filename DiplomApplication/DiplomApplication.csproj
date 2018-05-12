@@ -396,6 +396,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Config.cshtml" />
     <Content Include="Views\Home\DocList2.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Edit2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

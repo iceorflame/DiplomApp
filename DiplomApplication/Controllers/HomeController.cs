@@ -60,12 +60,9 @@ namespace DiplomApplication.Controllers
         [Authorize]
         public ActionResult DocList()
         {
-            var orders = db.Orders.Include(p=>p.File);
-            //var orders = db.Orders.Include(p => p.File);
-            //var orders2 = orders.Include(p => p.Priority);
-            //var orders3 = orders2.Include(p => p.User);
-            //ViewBag.Orders = orders;
-            return View(orders.ToList());
+            var orders = db.Orders.Include(p=>p.User);
+            var orders2 = orders.Include(p=>p.File);
+            return View(orders2.ToList());
         }
 
         [Authorize]
@@ -73,6 +70,58 @@ namespace DiplomApplication.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
+        }
+
+        [Authorize]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Order order = db.Orders.Find(id);
+            if (order != null)
+            {
+                Models.File file = db.Files.Find(order.FileId);
+                if (file != null)
+                {
+                    db.Files.Remove(file);
+                    db.SaveChanges();
+                }
+                db.Orders.Remove(order);
+                db.SaveChanges();
+            }
+            return RedirectToAction("DocList", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Order order = db.Orders.Find(id);
+            if (order != null)
+            {
+                DateTime date = order.OrderDate;
+                ViewBag.date = date;
+                SelectList priorities = new SelectList(db.Priorities, "PriorityId", "PriorityName", order.PriorityId);
+                ViewBag.Priorities = priorities;
+                SelectList users = new SelectList(db.Users.Where(c => c.RoleId > 2), "UserId", "UserName", order.UserId);
+                ViewBag.Users = users;
+                return View(order);
+            }
+            return RedirectToAction("DocList", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Order order)
+        {
+
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("DocList", "Home");
         }
 
     }
