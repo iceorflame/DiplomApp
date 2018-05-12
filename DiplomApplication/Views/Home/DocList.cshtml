@@ -74,59 +74,48 @@
                                                     <tr class="buglist-headers">
                                                         <th class="column-selection"> &nbsp; </th>
                                                         <th class="column-edit"> &nbsp; </th>
-                                                        <th class="column-priority"><a href="view_all_set.php?sort_add=priority&amp;dir_add=ASC&amp;type=2">П</a></th>
-                                                        <th class="column-id"><a href="view_all_set.php?sort_add=id&amp;dir_add=ASC&amp;type=2">Номер</a></th>
-                                                        <th class="column-bugnotes-count"> <i class="fa fa-comments blue"></i> </th>
-                                                        <th class="column-attachments"><i class="fa fa-paperclip blue" title="Количество вложений"></i></th>
-                                                        <th class="column-category"><a href="view_all_set.php?sort_add=category_id&amp;dir_add=ASC&amp;type=2">Категория</a></th>
-                                                        <th class="column-severity"><a href="view_all_set.php?sort_add=severity&amp;dir_add=ASC&amp;type=2">Влияние</a></th>
-                                                        <th class="column-status"><a href="view_all_set.php?sort_add=status&amp;dir_add=ASC&amp;type=2">Состояние</a></th>
-                                                        <th class="column-last-modified"><a href="view_all_set.php?sort_add=last_updated&amp;dir_add=ASC&amp;type=2">Изменена</a>&nbsp;<!--<i class="fa fa-caret-down fa-lg blue"></i>--></th>
-                                                        <th class="column-summary"><a href="view_all_set.php?sort_add=summary&amp;dir_add=ASC&amp;type=2">Тема</a></th>
+                                                        <th class="column-priority"><a>Пріорітет</a></th>
+                                                        <th class="column-id"><a>Номер</a></th>
+                                                        <th class="column-last-modified"><a>Дата отримання</a>&nbsp;<!--<i class="fa fa-caret-down fa-lg blue"></i>--></th>
+                                                        <th class="column-category"><a>Назва документу</a></th>
+                                                        <th class="column-last-modified"><a>Дата відправки</a>&nbsp;<!--<i class="fa fa-caret-down fa-lg blue"></i>--></th>
+                                                        <th class="column-bugnotes-count"> <i class="fa fa-comments blue" title="Адресат"></i> </th>
+                                                        <th class="column-attachments"><i class="fa fa-paperclip blue" title="Документ"></i></th>
                                                     </tr>
-                                                    @foreach (var item in Model)
-                                                    {
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>@item.OrderNumber</td>
-                                                        <td>@item.OrderDate.ToString("dd.MM.yyyy")</td>
-                                                        <td>@item.OrderName</td>
-                                                        <td>@item.OrderOut.ToString("dd.MM.yyyy")</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.User.UserName)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Priority.PriorityName)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.File.FileName)</td>
-                                                    </tr>
-                                                    }
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td class="column-selection"><div class="checkbox no-padding no-margin"><label><input type="checkbox" name="bug_arr[]" value="8" class="ace"><span class="lbl"></span></label></div></td>
-                                                        <td class="column-edit"><a href="bug_update_page.php?bug_id=8"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Изменить"></i></a></td>
-                                                        <td class="column-priority"> <i class="fa fa-exclamation-triangle fa-lg red" title="неотложный"></i></td>
-                                                        <td class="column-id"><a href="/view.php?id=8">0000008</a></td>
-                                                        <td class="column-bugnotes-count">&nbsp;</td>
-                                                        <td class="column-attachments"> &nbsp; </td>
-                                                        <td class="column-category"><div class="align-left">Общая</div></td>
-                                                        <td class="column-severity">малое</td>
-                                                        <td class="column-status"><div class="align-left"><i class="fa fa-square fa-status-box status-10-color"></i> <span title="открыта">новая</span></div></td>
-                                                        <td class="column-last-modified">2018-05-09</td>
-                                                        <td class="column-summary">Неотложный</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="column-selection"><div class="checkbox no-padding no-margin"><label><input type="checkbox" name="bug_arr[]" value="9" class="ace"><span class="lbl"></span></label></div></td>
-                                                        <td class="column-edit"><a href="bug_update_page.php?bug_id=9"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Изменить"></i></a></td>
-                                                        <td class="column-priority"> <i class="fa fa-minus fa-lg orange2" title="обычный"></i></td>
-                                                        <td class="column-id"><a href="/view.php?id=9">0000009</a></td>
-                                                        <td class="column-bugnotes-count">&nbsp;</td>
-                                                        <td class="column-attachments"><a href="view.php?id=9#attachments" title="Открыть 1 вложение (я, й) для задачи #9">1</a></td>
-                                                        <td class="column-category"><div class="align-left">Общая</div></td>
-                                                        <td class="column-severity">малое</td>
-                                                        <td class="column-status"><div class="align-left"><i class="fa fa-square fa-status-box status-10-color"></i> <span title="открыта">новая</span></div></td>
-                                                        <td class="column-last-modified">2018-05-10</td>
-                                                        <td class="column-summary">File</td>
-                                                    </tr>
+                                                    @foreach (var item in Model)
+                                                 {
+                                                @*<tr>
+                                                    <td class="column-selection"><div class="checkbox no-padding no-margin"><label><input type="checkbox" name="bug_arr[]" value="8" class="ace"><span class="lbl"></span></label></div></td>
+                                                    <td class="column-edit"><a href="bug_update_page.php?bug_id=8"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Изменить"></i></a></td>
+                                                    <td class="column-priority"> <i class="fa fa-exclamation-triangle fa-lg red" title="неотложный"></i></td>
+                                                    <td class="column-id"><a>0000008</a></td>
+                                                    <td class="column-bugnotes-count">&nbsp;</td>
+                                                    <td class="column-attachments"> &nbsp; </td>
+                                                    <td class="column-category"><div class="align-left">Общая</div></td>
+                                                    <td class="column-severity">малое</td>
+                                                    <td class="column-status"><div class="align-left"><i class="fa fa-square fa-status-box status-10-color"></i> <span title="открыта">новая</span></div></td>
+                                                    <td class="column-last-modified">2018-05-09</td>
+                                                    <td class="column-summary">Неотложный</td>
+                                                </tr>*@
+                                                <tr>
+                                                    <td class="column-selection"><a href="bug_update_page.php?bug_id=9"><i class="fa fa-trash bigger-130 padding-2 grey" title="Видалити"></i></a></td>
+                                                    <td class="column-edit"><a href="bug_update_page.php?bug_id=9"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Редагувати"></i></a></td>
+                                                    <td class="column-priority">@if (item.PriorityId == 2) { <i class="fa fa-chevron-down fa-lg green" title="Низький" />}
+                                                                                @if (item.PriorityId == 3) { <i class="fa fa-minus fa-lg orange2" title="Звичайний" />}
+                                                                                @if (item.PriorityId == 4) { <i class="fa fa-chevron-up fa-lg red" title="Високий" />}
+                                                                                @if (item.PriorityId == 5) { <i class="fa fa-arrow-up fa-lg red" title="Терміновий" />}
+                                                                                @if (item.PriorityId == 6) { <i class="fa fa-exclamation-triangle fa-lg red" title="Невідкладний" />}
+                                                    </td>
+                                                    <td class="column-id">@item.OrderNumber</td>
+                                                    <td class="column-last-modified">@item.OrderDate.ToString("dd.MM.yyyy")</td>
+                                                    <td class="column-category"><div class="align-left">@item.OrderName</div></td>
+                                                    <td class="column-last-modified">@item.OrderOut.ToString("dd.MM.yyyy")</td>
+                                                    <td class="column-bugnotes-count">&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)</td>
+                                                    <td class="column-attachments"><a>@Html.DisplayFor(modelItem => item.File.FileName)</a></td>
+                                                </tr>
+                                                }
                                                 </tbody>
                                             </table>
                                         </div>
