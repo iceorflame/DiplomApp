@@ -316,3 +316,5 @@ D:\Data\Documents\Диплом\DiplomApp\DiplomApplication\obj\Debug\DiplomAppli
 D:\Data\Documents\Диплом\DiplomApp\DiplomApplication\obj\Debug\DiplomApplication.csproj.CopyComplete
 D:\Data\Documents\Диплом\DiplomApp\DiplomApplication\obj\Debug\DiplomApplication.dll
 D:\Data\Documents\Диплом\DiplomApp\DiplomApplication\obj\Debug\DiplomApplication.pdb
+D:\Data\Documents\Диплом\DiplomApp\DiplomApplication\bin\System.Web.Providers.dll
+D:\Data\Documents\Диплом\DiplomApp\DiplomApplication\bin\System.Web.Providers.xml

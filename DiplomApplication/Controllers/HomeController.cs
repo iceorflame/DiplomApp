@@ -16,10 +16,16 @@ namespace DiplomApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole("office"))
+            {
+                var orders = db.Orders.Include(p => p.User).Include(p => p.File).OrderByDescending(x => x.OrderId).Take(10);
+                return View(orders.ToList());
+            }
+            var orders2 = db.Orders.Include(p => p.User).Include(p => p.File).OrderByDescending(x => x.OrderId).Take(10).Where(p=>p.User.UserLogin==User.Identity.Name);
+            return View(orders2.ToList());
         }
 
-        [Authorize]
+        [Authorize(Roles = "office")]
         [HttpGet]
         public ActionResult Add()
         {
@@ -31,7 +37,7 @@ namespace DiplomApplication.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "office")]
         [HttpPost]
         public ActionResult Add(Order order, Models.File file, HttpPostedFileBase uploadFile = null)
         {
@@ -60,8 +66,12 @@ namespace DiplomApplication.Controllers
         [Authorize]
         public ActionResult DocList()
         {
-            var orders = db.Orders.Include(p=>p.User);
-            var orders2 = orders.Include(p=>p.File);
+            if (User.IsInRole("office"))
+            {
+                var orders = db.Orders.Include(p => p.User).Include(p => p.File).OrderByDescending(x => x.OrderId);
+                return View(orders.ToList());
+            }
+            var orders2 = db.Orders.Include(p => p.User).Include(p => p.File).OrderByDescending(x => x.OrderId).Where(p => p.User.UserLogin == User.Identity.Name);
             return View(orders2.ToList());
         }
 
@@ -72,7 +82,7 @@ namespace DiplomApplication.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        [Authorize]
+        [Authorize(Roles = "office")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -95,6 +105,7 @@ namespace DiplomApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "office")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,8 +125,24 @@ namespace DiplomApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Order order)
+        [Authorize(Roles = "office")]
+        public ActionResult Edit(Order order, Models.File file, HttpPostedFileBase uploadFile=null)
         {
+            if (uploadFile != null)
+            {
+                byte[] imageData = null;
+                // считываем переданный файл в массив байтов
+                using (var binaryReader = new BinaryReader(uploadFile.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(uploadFile.ContentLength);
+                }
+                // установка массива байтов
+                file.FileByte = imageData;
+                file.FileName = uploadFile.FileName;
+                file.FileType = uploadFile.ContentType;
+                db.Files.Add(file);
+                order.FileId = file.FileId;
+            }
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("DocList", "Home");
@@ -124,8 +151,10 @@ namespace DiplomApplication.Controllers
         [HttpGet]
         public FileResult Download(int? id)
         {
+
             Models.File file = db.Files.Find(id);
-            return File(file.FileByte,file.FileType,file.FileName);
+            return File(file.FileByte, file.FileType, file.FileName);
+
         }
 
     }

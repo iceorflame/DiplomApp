@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Редагувати документ";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <body class="skin-3">
         <style>

@@ -13,7 +13,7 @@
             font-family: "Open Sans";
         }
     </style>
-    <div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint"><div id="navbar-container" class="navbar-container"><button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar"><span class="sr-only">Toggle sidebar</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-header"><a href="~/Home/Index" class="navbar-brand"><span class="smaller-75"> Документообіг </span></a><button type="button" class="navbar-toggle navbar-toggle collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu"><span class="sr-only">Toggle user menu</span><i class="ace-icon fa fa-user fa-2x white"></i> </button></div><div class="navbar-buttons navbar-header navbar-collapse collapse"><ul class="nav ace-nav"><li class="hidden-sm hidden-xs"><div class="btn-group btn-corner padding-right-8 padding-left-8"><a class="btn btn-primary btn-sm" href="~/Home/Add"><i class="fa fa-edit"></i> Додати документ </a></div></li><li class="grey"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="ace-icon fa fa-user fa-2x white"></i> <span class="user-info">@User.Identity.Name</span><i class="ace-icon fa fa-angle-down"></i></a><ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close"><li><a href="~/Account/Config"><i class="ace-icon fa fa-user"> </i> Керування</a></li><li class="divider"></li><li><a href="~/Home/Logoff"><i class="ace-icon fa fa-sign-out"> </i> Вихід</a></li></ul></li></ul></div></div></div><div class="main-container" id="main-container" style="padding-top: 45px;">
+    <div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint"><div id="navbar-container" class="navbar-container"><button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar"><span class="sr-only">Toggle sidebar</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-header"><a href="~/Home/Index" class="navbar-brand"><span class="smaller-75"> Документообіг </span></a><button type="button" class="navbar-toggle navbar-toggle collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu"><span class="sr-only">Toggle user menu</span><i class="ace-icon fa fa-user fa-2x white"></i> </button></div><div class="navbar-buttons navbar-header navbar-collapse collapse"><ul class="nav ace-nav"><li class="hidden-sm hidden-xs">  @if (User.IsInRole("office")) { <div class="btn-group btn-corner padding-right-8 padding-left-8"><a class="btn btn-primary btn-sm" href="~/Home/Add"><i class="fa fa-edit"></i> Додати документ </a></div>}</li><li class="grey"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="ace-icon fa fa-user fa-2x white"></i> <span class="user-info">@User.Identity.Name</span><i class="ace-icon fa fa-angle-down"></i></a><ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close"><li><a href="~/Account/Config"><i class="ace-icon fa fa-user"> </i> Керування</a></li><li class="divider"></li><li><a href="~/Home/Logoff"><i class="ace-icon fa fa-sign-out"> </i> Вихід</a></li></ul></li></ul></div></div></div><div class="main-container" id="main-container" style="padding-top: 45px;">
         <div id="sidebar" class="sidebar sidebar-fixed responsive compact ">
             <ul class="nav nav-list">
                 <li>
@@ -30,13 +30,15 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
+              @if (User.IsInRole("office"))
+              {
                 <li>
                     <a href="~/Home/Add">
                         <i class="menu-icon fa fa-edit"></i>
                         <span class="menu-text"> Додати документ </span>
                     </a>
                     <b class="arrow"></b>
-                </li>
+                </li>}
                 <li>
                     <a href="~/Account/Config">
                         <i class="menu-icon fa fa-gears"></i>
@@ -63,7 +65,7 @@
                                 <div class="widget-header widget-header-small">
                                     <h4 class="widget-title lighter">
                                         <i class="ace-icon fa fa-columns"></i>
-                                        Список задач
+                                        Список документів
                                     </h4>
                                 </div>
                                 <div class="widget-body">
@@ -72,8 +74,9 @@
                                             <table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
                                                 <thead>
                                                     <tr class="buglist-headers">
+                                                          @if (User.IsInRole("office")) { 
                                                         <th class="column-selection"> &nbsp; </th>
-                                                        <th class="column-edit"> &nbsp; </th>
+                                                        <th class="column-edit"> &nbsp; </th>}
                                                         <th class="column-priority"><a>Пріорітет</a></th>
                                                         <th class="column-id"><a>Номер</a></th>
                                                         <th class="column-last-modified"><a>Дата отримання</a>&nbsp;<!--<i class="fa fa-caret-down fa-lg blue"></i>--></th>
@@ -100,8 +103,9 @@
                                                     <td class="column-summary">Неотложный</td>
                                                 </tr>*@
                                                 <tr>
+                                                      @if (User.IsInRole("office")) { 
                                                     <td class="column-selection"><a href="~/Home/Delete/@item.OrderId"><i class="fa fa-trash bigger-130 padding-2 grey" title="Видалити"></i></a></td>
-                                                    <td class="column-edit"><a href="~/Home/Edit/@item.OrderId"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Редагувати"></i></a></td>
+                                                    <td class="column-edit"><a href="~/Home/Edit/@item.OrderId"><i class="fa fa-pencil bigger-130 padding-2 grey" title="Редагувати"></i></a></td>}
                                                     <td class="column-priority">@if (item.PriorityId == 2) { <i class="fa fa-chevron-down fa-lg green" title="Низький" />}
                                                                                 @if (item.PriorityId == 3) { <i class="fa fa-minus fa-lg orange2" title="Звичайний" />}
                                                                                 @if (item.PriorityId == 4) { <i class="fa fa-chevron-up fa-lg red" title="Високий" />}

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<DiplomApplication.Models.Order>
+@{
     ViewBag.Title = "Документообіг";
 }
 @{
@@ -6,6 +7,7 @@
 }
 <body class="skin-3">
     <style>
+
         * {
             font-family: "Open Sans";
         }
@@ -14,7 +16,8 @@
             font-family: "Open Sans";
         }
     </style>
-    <div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint"><div id="navbar-container" class="navbar-container"><button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar"><span class="sr-only">Toggle sidebar</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-header"><a href="~/Home/Index" class="navbar-brand"><span class="smaller-75"> Документообіг </span></a><button type="button" class="navbar-toggle navbar-toggle collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu"><span class="sr-only">Toggle user menu</span><i class="ace-icon fa fa-user fa-2x white"></i> </button></div><div class="navbar-buttons navbar-header navbar-collapse collapse"><ul class="nav ace-nav"><li class="hidden-sm hidden-xs"><div class="btn-group btn-corner padding-right-8 padding-left-8"><a class="btn btn-primary btn-sm" href="~/Home/Add"><i class="fa fa-edit"></i> Додати документ </a></div></li><li class="grey"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="ace-icon fa fa-user fa-2x white"></i> <span class="user-info">@User.Identity.Name</span><i class="ace-icon fa fa-angle-down"></i></a><ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close"><li><a href="~/Account/Config"><i class="ace-icon fa fa-user"> </i> Керування</a></li><li class="divider"></li><li><a href="~/Home/Logoff"><i class="ace-icon fa fa-sign-out"> </i> Вихід</a></li></ul></li></ul></div></div></div><div class="main-container" id="main-container" style="padding-top: 45px;">
+    <div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint"><div id="navbar-container" class="navbar-container"><button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar"><span class="sr-only">Toggle sidebar</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-header"><a href="~/Home/Index" class="navbar-brand"><span class="smaller-75"> Документообіг </span></a><button type="button" class="navbar-toggle navbar-toggle collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu"><span class="sr-only">Toggle user menu</span><i class="ace-icon fa fa-user fa-2x white"></i> </button></div><div class="navbar-buttons navbar-header navbar-collapse collapse"><ul class="nav ace-nav"><li class="hidden-sm hidden-xs">  @if (User.IsInRole("office"))
+    {<div class="btn-group btn-corner padding-right-8 padding-left-8"><a class="btn btn-primary btn-sm" href="~/Home/Add"><i class="fa fa-edit"></i> Додати документ </a></div>}</li><li class="grey"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="ace-icon fa fa-user fa-2x white"></i> <span class="user-info">@User.Identity.Name</span><i class="ace-icon fa fa-angle-down"></i></a><ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close"><li><a href="~/Account/Config"><i class="ace-icon fa fa-user"> </i> Керування</a></li><li class="divider"></li><li><a href="~/Home/Logoff"><i class="ace-icon fa fa-sign-out"> </i> Вихід</a></li></ul></li></ul></div></div></div><div class="main-container" id="main-container" style="padding-top: 45px;">
         <div id="sidebar" class="sidebar sidebar-fixed responsive compact ">
             <ul class="nav nav-list">
                 <li class="active">
@@ -31,13 +34,15 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li>
-                    <a href="~/Home/Add">
-                        <i class="menu-icon fa fa-edit"></i>
-                        <span class="menu-text"> Додати документ </span>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
+                @if (User.IsInRole("office"))
+                {
+                    <li>
+                        <a href="~/Home/Add">
+                            <i class="menu-icon fa fa-edit"></i>
+                            <span class="menu-text"> Додати документ </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>}
                 <li>
                     <a href="~/Account/Config">
                         <i class="menu-icon fa fa-gears"></i>
@@ -58,40 +63,72 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
-                    <div id="assigned" class="widget-box widget-color-blue2">
-                        <div class="widget-header widget-header-small">
-                            <h4 class="widget-title lighter">
-                                <i class="ace-icon fa fa-list-alt"></i>
-                                <a class="white" href="view_all_set.php?type=1&amp;temporary=y&amp;handler_id=1&amp;hide_status=80">Назначенные мне, нерешенные</a>
-                            </h4>
-                            <div class="widget-toolbar">
-                                <a data-action="collapse" href="#">
-                                    <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
-                                </a>
+                        <div id="assigned" class="widget-box widget-color-blue2">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title lighter">
+                                    <i class="ace-icon fa fa-list-alt"></i>
+                                    <a class="white" href="view_all_set.php?type=1&amp;temporary=y&amp;handler_id=1&amp;hide_status=80">Останні отримані документи</a>
+                                </h4>
+                                <div class="widget-toolbar">
+                                    <a data-action="collapse" href="#">
+                                        <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
+                                    </a>
+                                </div>
+                                <div class="widget-toolbar no-border hidden-xs">
+                                    <div class="widget-menu">
+                                        <a class="btn btn-primary btn-white btn-round btn-sm" href="~/Home/DocList">Список документів</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="widget-toolbar no-border hidden-xs">
-                                <div class="widget-menu">
-                                    <a class="btn btn-primary btn-white btn-round btn-sm" href="~/Home/DocList">Список документів</a>
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+                                    <div class="table-responsive">
+                                        <table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
+                                            <thead>
+                                                    <tr class="buglist-headers">
+                                                        <th class="column-priority"><a>Пріорітет</a></th>
+                                                        <th class="column-id"><a>Номер</a></th>
+                                                        <th class="column-last-modified"><a>Дата отримання</a></th>
+                                                        <th class="column-category"><a>Назва документу</a></th>
+                                                        <th class="column-last-modified"><a>Дата відправки</a></th>
+                                                        <th class="column-bugnotes-count"> <i class="fa fa-comments blue" title="Адресат"></i> </th>
+                                                        <th class="column-attachments"><i class="fa fa-paperclip blue" title="Документ"></i></th>
+                                                    </tr>
+                                                </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td class="column-priority" align="center">
+                                                            @if (item.PriorityId == 2)
+                                                            {<i class="fa fa-chevron-down fa-lg green" title="Низький" />}
+                                                        @if (item.PriorityId == 3)
+                                                        {<i class="fa fa-minus fa-lg orange2" title="Звичайний" />}
+                                                        @if (item.PriorityId == 4)
+                                                        {<i class="fa fa-chevron-up fa-lg red" title="Високий" />}
+                                                        @if (item.PriorityId == 5)
+                                                        {<i class="fa fa-arrow-up fa-lg red" title="Терміновий" />}
+                                                        @if (item.PriorityId == 6)
+                                                        {<i class="fa fa-exclamation-triangle fa-lg red" title="Невідкладний" />}
+                                                    </td>
+                                                    <td class="column-id">@item.OrderNumber</td>
+                                                    <td class="column-last-modified" align="center">@item.OrderDate.ToString("dd.MM.yyyy")</td>
+                                                    <td class="column-category"><div class="align-left">@item.OrderName</div></td>
+                                                    <td class="column-last-modified">@item.OrderOut.ToString("dd.MM.yyyy")</td>
+                                                    <td class="column-bugnotes-count">&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)</td>
+                                                    <td class="column-attachments"><a href="~/Home/Download/@item.FileId">@Html.DisplayFor(modelItem => item.File.FileName)</a></td>
+                                                </tr>
+                                            }
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="widget-body">
-                            <div class="widget-main no-padding">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-condensed table-striped table-hover">
-                                        <tbody>
-                                            <tr><td>&nbsp;</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="space-10"></div>
                     </div>
-                    <div class="space-10"></div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
