@@ -113,7 +113,7 @@
                                                     <td class="column-category"><div class="align-left">@item.OrderName</div></td>
                                                     <td class="column-last-modified">@item.OrderOut.ToString("dd.MM.yyyy")</td>
                                                     <td class="column-bugnotes-count">&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)</td>
-                                                    <td class="column-attachments"><a>@Html.DisplayFor(modelItem => item.File.FileName)</a></td>
+                                                    <td class="column-attachments"><a href="~/Home/Download/@item.FileId">@Html.DisplayFor(modelItem => item.File.FileName)</a></td>
                                                 </tr>
                                                 }
                                                 </tbody>

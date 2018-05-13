@@ -46,7 +46,7 @@ namespace DiplomApplication.Controllers
                 // установка массива байтов
                 file.FileByte = imageData;
                 file.FileName = uploadFile.FileName;
-                file.FileType = "";
+                file.FileType = uploadFile.ContentType;
                 db.Files.Add(file);
                 order.FileId = file.FileId;
             }
@@ -104,8 +104,6 @@ namespace DiplomApplication.Controllers
             Order order = db.Orders.Find(id);
             if (order != null)
             {
-                DateTime date = order.OrderDate;
-                ViewBag.date = date;
                 SelectList priorities = new SelectList(db.Priorities, "PriorityId", "PriorityName", order.PriorityId);
                 ViewBag.Priorities = priorities;
                 SelectList users = new SelectList(db.Users.Where(c => c.RoleId > 2), "UserId", "UserName", order.UserId);
@@ -118,10 +116,16 @@ namespace DiplomApplication.Controllers
         [HttpPost]
         public ActionResult Edit(Order order)
         {
-
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("DocList", "Home");
+        }
+
+        [HttpGet]
+        public FileResult Download(int? id)
+        {
+            Models.File file = db.Files.Find(id);
+            return File(file.FileByte,file.FileType,file.FileName);
         }
 
     }
