@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using System.Web.Security;
 
 namespace DiplomApplication.Controllers
@@ -43,10 +44,34 @@ namespace DiplomApplication.Controllers
             return View(model);
         }
 
-        [Authorize]
         public ActionResult Config()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Config(PasswordModel model)
+        {
+            UserContext db = new UserContext();
+            if (ModelState.IsValid)
+            {
+                User user = null;
+                user = db.Users.FirstOrDefault(u => u.UserLogin == User.Identity.Name && u.UserPassword == model.UserPassword);
+                if (user != null && model.NewPassword == model.ConfirmPassword)
+                {
+                    user.UserPassword = model.NewPassword;
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Logoff", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Не співпадають паролі. Спробуйте знову.");
+                }
+            }
+                return View(model);
         }
     }
 }
