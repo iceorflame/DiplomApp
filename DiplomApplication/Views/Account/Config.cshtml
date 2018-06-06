@@ -86,7 +86,7 @@
                                         <div class="widget-header widget-header-small">
                                             <h4 class="widget-title lighter">
                                                 <i class="ace-icon fa fa-user"></i>
-                                                Изменение учетной записи
+                                                Зміна облікового запису
                                             </h4>
                                         </div>
                                         <div class="widget-body">
@@ -97,7 +97,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class="category">
-                                                                    Пользователь
+                                                                    Користувач
                                                                 </td>
                                                                 <td>
                                                                     @User.Identity.Name
@@ -105,26 +105,26 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="category">
-                                                                    <span></span> Текущий пароль
+                                                                    <span></span> Нинішній пароль
                                                                 </td>
                                                                 <td>
-                                                                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @type = "password", @placeholder = "Текущий пароль", @size = "32", @maxlength = "1024", @class = "form-control autofocus" } })
+                                                                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @type = "password", @placeholder = "Нинішній пароль", @size = "32", @maxlength = "1024", @class = "form-control autofocus" } })
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="category">
-                                                                    <span></span> Новый пароль
+                                                                    <span></span> Новий пароль
                                                                 </td>
                                                                 <td>
-                                                                    @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @type = "password", @placeholder = "Новый пароль", @size = "32", @maxlength = "1024", @class = "form-control autofocus" } })
+                                                                    @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @type = "password", @placeholder = "Новий пароль", @size = "32", @maxlength = "1024", @class = "form-control autofocus" } })
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="category">
-                                                                    <span></span> Подтверждение пароля
+                                                                    <span></span> Підтвердження пароля
                                                                 </td>
                                                                 <td>
-                                                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @type = "password", @placeholder = "Подтверждение пароля", @size = "32", @maxlength = "1024", @class = "form-control autofocus" } })
+                                                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @type = "password", @placeholder = "Підтвердження пароля", @size = "32", @maxlength = "1024", @class = "form-control autofocus" } })
                                                                 </td>
                                                             </tr>
 
@@ -133,7 +133,7 @@
                                                 </div>
                                             </div>
                                             <div class="widget-toolbox padding-8 clearfix">
-                                                <input type="submit" class="btn btn-primary btn-white btn-round" value="Изменить учетную запись">
+                                                <input type="submit" class="btn btn-primary btn-white btn-round" value="Змінити обліковий запис">
                                             </div>
                                         </div>
                                     </div>

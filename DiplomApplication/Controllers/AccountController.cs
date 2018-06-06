@@ -44,6 +44,7 @@ namespace DiplomApplication.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Config()
         {
             return View();
